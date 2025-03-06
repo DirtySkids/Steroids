@@ -1,7 +1,7 @@
 # Steroids
 
 Steroids is my First Minecraft plugin!
-This plugin is for (Paper)[https://papermc.io/downloads/paper]
+This plugin is for [Paper](https://papermc.io/downloads/paper)
 
 ## Features
 Simple scoreboard
