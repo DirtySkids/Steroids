@@ -1,0 +1,13 @@
+name: steroids
+version: '1.0'
+main: org.dirtyskids.steroids.Steroids
+api-version: '1.21'
+authors: [ Mxrc3l ]
+commands:
+  steroids:
+    description: Manage ranks
+    usage: /steroids rank add/remove <player>
+permissions:
+  op:
+    description: Admin-level commands
+    default: op

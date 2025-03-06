@@ -1,0 +1,4 @@
+# Configuration file for the Steroids plugin
+furnace-speed-multiplier: 2
+xp-multiplier: 2
+ore-spawn-rate: 0.05
