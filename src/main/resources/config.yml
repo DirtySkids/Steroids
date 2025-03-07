@@ -2,3 +2,4 @@
 furnace-speed-multiplier: 2
 xp-multiplier: 2
 ore-spawn-rate: 0.05
+webhook_url: "YOUR_DISCORD_WEBHOOK_URL"

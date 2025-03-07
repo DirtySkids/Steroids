@@ -20,22 +20,26 @@ import java.nio.file.Path;
 public final class Steroids extends JavaPlugin implements Listener {
 
     private RankManager rankManager;
+    private Logger logger;
 
     @Override
     public void onEnable() {
         getLogger().info("Steroids is enabled");
-       Bukkit.getPluginManager().registerEvents(new FurnaceListener(), this);
-       Bukkit.getPluginManager().registerEvents(this, this);
-       Bukkit.getPluginManager().registerEvents(new OreXPListener(), this);
-       getServer().getWorlds().forEach(world -> world.getPopulators().add(new OrePopulator()));
-       new ScoreboardUpdater(this).runTaskTimer(this, 0L, 20L);
-       saveDefaultConfig();
-       rankManager = new RankManager(getConfig());
+        Bukkit.getPluginManager().registerEvents(new FurnaceListener(), this);
+        Bukkit.getPluginManager().registerEvents(this, this);
+        Bukkit.getPluginManager().registerEvents(new OreXPListener(), this);
+        getServer().getWorlds().forEach(world -> world.getPopulators().add(new OrePopulator()));
+        new ScoreboardUpdater(this).runTaskTimer(this, 0L, 20L);
+
+        saveDefaultConfig();
+
+        rankManager = new RankManager(getConfig());
 
         getCommand("steroids").setExecutor(new SteroidsCommand(rankManager));
         getServer().getPluginManager().registerEvents(new ChatAndTabListener(rankManager), this);
         getServer().getPluginManager().registerEvents(new CommandBlockListener(rankManager), this);
-
+        logger = new Logger(getConfig());
+        logger.log("Server Started", "The server has been started successfully.", 0x00FF00);
     }
 
     @Override
@@ -46,8 +50,17 @@ public final class Steroids extends JavaPlugin implements Listener {
     @Override
     public void onDisable() {
         Bukkit.getScheduler().cancelTasks(this);
-        saveConfig();
+        saveConfig(); // Save the configuration before shutting down
         getLogger().info("Steroids plugin Disabled!");
+        if (logger != null) {
+            logger.log("Server Stopped", "The server has been stopped.", 0xFF0000);
+        }
+    }
+
+    public void logError(String errorMessage) {
+        if (logger != null) {
+            logger.log("Error", errorMessage, 15158332); // Red color
+        }
     }
 
     @EventHandler

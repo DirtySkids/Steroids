@@ -1,6 +1,5 @@
 package org.dirtyskids.steroids;
 
-
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
@@ -17,8 +16,13 @@ public class SteroidsCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (args.length <3 || !args[0].equalsIgnoreCase("rank")) {
-            sender.sendMessage("Ussage: /steroids rank add/remove <player>");
+        if (!sender.isOp()) {
+            sender.sendMessage("You do not have permission to use this command.");
+            return true;
+        }
+
+        if (args.length < 3 || !args[0].equalsIgnoreCase("rank")) {
+            sender.sendMessage("Usage: /steroids rank add/remove <player>");
             return false;
         }
 
